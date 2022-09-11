@@ -4,6 +4,9 @@ declare global {
 	const $httpClient
 	const $loon
 	const $rocket
+	const $request
+
+	const process
 }
 
 export class Http {
