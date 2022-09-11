@@ -4,7 +4,7 @@ declare global {
 	const $httpClient
 	const $loon
 	const $rocket
-	const $request
+	var $request
 
 	const process
 }
