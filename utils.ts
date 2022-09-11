@@ -1,3 +1,11 @@
+declare global {
+	const module
+	const $task
+	const $httpClient
+	const $loon
+	const $rocket
+}
+
 export class Http {
 	env: string
 	constructor(env) {
@@ -48,6 +56,35 @@ export class Env {
 		this.startTime = new Date().getTime()
 		Object.assign(this, opts)
 		this.log('', `🔔${this.name}, 开始!`)
+	}
+	isNode() {
+		return 'undefined' !== typeof module && !!module.exports
+	}
+	isQuanX() {
+		return 'undefined' !== typeof $task
+	}
+	isSurge() {
+		return 'undefined' !== typeof $httpClient && 'undefined' === typeof $loon
+	}
+	isLoon() {
+		return 'undefined' !== typeof $loon
+	}
+	isShadowrocket() {
+		return 'undefined' !== typeof $rocket
+	}
+	toObj(str, defaultValue = null) {
+		try {
+			return JSON.parse(str)
+		} catch {
+			return defaultValue
+		}
+	}
+	toStr(obj, defaultValue = null) {
+		try {
+			return JSON.stringify(obj)
+		} catch {
+			return defaultValue
+		}
 	}
 	log(...logs) {
 		if (logs.length > 0) {
