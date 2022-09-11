@@ -1,1 +1,3 @@
-console.log('hello world')
+import { Env } from "./utils";
+
+const $ = new Env('高佣金');
