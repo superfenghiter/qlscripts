@@ -2,4 +2,8 @@ import { Env } from "./utils";
 
 const $ = new Env('高佣金');
 
-console.log($task);
+function isQuanX() {
+    return 'undefined' !== typeof $task
+}
+
+console.log(isQuanX());
