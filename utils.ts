@@ -156,9 +156,6 @@ export class Env {
 			const rootDirDataFilePath = this.path.resolve(process.cwd(), this.dataFile)
 			const isCurDirDataFile = this.fs.existsSync(curDirDataFilePath)
 			const isRootDirDataFile = !isCurDirDataFile && this.fs.existsSync(rootDirDataFilePath)
-			console.log('c: ' + curDirDataFilePath)
-			console.log('r: ' + rootDirDataFilePath)
-			console.log(isCurDirDataFile || isRootDirDataFile)
 			if (isCurDirDataFile || isRootDirDataFile) {
 				const datPath = isCurDirDataFile ? curDirDataFilePath : rootDirDataFilePath
 				console.log(datPath)
@@ -252,9 +249,7 @@ export class Env {
 		} else if (this.isQuanX()) {
 			return $prefs.valueForKey(key)
 		} else if (this.isNode()) {
-			console.log('enter node')
 			this.data = this.loaddata()
-			console.log(this.data)
 			return this.data?[key] : null
 		} else {
 			return (this.data && this.data[key]) || null
