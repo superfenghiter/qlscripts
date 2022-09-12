@@ -152,14 +152,13 @@ export class Env {
 		if (this.isNode()) {
 			this.fs = this.fs ? this.fs : require('fs')
 			this.path = this.path ? this.path : require('path')
-			console.log(this.fs)
-			console.log(this.path)
 			const curDirDataFilePath = this.path.resolve(this.dataFile)
 			const rootDirDataFilePath = this.path.resolve(process.cwd(), this.dataFile)
 			const isCurDirDataFile = this.fs.existsSync(curDirDataFilePath)
 			const isRootDirDataFile = !isCurDirDataFile && this.fs.existsSync(rootDirDataFilePath)
 			if (isCurDirDataFile || isRootDirDataFile) {
 				const datPath = isCurDirDataFile ? curDirDataFilePath : rootDirDataFilePath
+				console.log(datPath)
 				try {
 					return JSON.parse(this.fs.readFileSync(datPath))
 				} catch (e) {
@@ -246,17 +245,15 @@ export class Env {
 	}
 	getval(key: string) {
 		if (this.isSurge() || this.isLoon()) {
-			console.log('enter surge and loon')
 			return $persistentStore.read(key)
 		} else if (this.isQuanX()) {
-			console.log('enter quanX')
 			return $prefs.valueForKey(key)
 		} else if (this.isNode()) {
 			console.log('enter node')
 			this.data = this.loaddata()
+			console.log(this.data)
 			return this.data?[key] : null
 		} else {
-			console.log('enter else')
 			return (this.data && this.data[key]) || null
 		}
 	}
