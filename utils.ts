@@ -50,6 +50,8 @@ export class Env {
 	isNeedRewrite: boolean
 	logSeparator: string
 	startTime: number
+	message: string
+	index: number
 
 	fs: any
 	path: any
@@ -279,7 +281,7 @@ export class Env {
 			}
 		}
 	}
-	get(opts, callback: (err: string | null, resp?: object, body?: object) => void = () => { }) {
+	get(opts, callback: (err: string | null, resp?: object, body?: string) => void = () => { }, timeout?: number) {
 		if (opts.headers) {
 			delete opts.headers['Content-Type']
 			delete opts.headers['Content-Length']
@@ -484,7 +486,7 @@ export class Env {
 	 * @param {*} opts 通知参数
 	 *
 	 */
-	msg(title: string = this.name, subt = '', desc = '', opts) {
+	msg(title: string = this.name, subt = '', desc = '', opts?) {
 		const toEnvOpts = (rawopts) => {
 			if (!rawopts) return rawopts
 			if (typeof rawopts === 'string') {
