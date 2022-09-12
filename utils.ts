@@ -244,10 +244,13 @@ export class Env {
 	}
 	getval(key: string) {
 		if (this.isSurge() || this.isLoon()) {
+			console.log('enter surge and loon')
 			return $persistentStore.read(key)
 		} else if (this.isQuanX()) {
+			console.log('enter quanX')
 			return $prefs.valueForKey(key)
 		} else if (this.isNode()) {
+			console.log('enter node')
 			this.data = this.loaddata()
 			return this.data?[key] : null
 		} else {
