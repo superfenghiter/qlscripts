@@ -156,6 +156,9 @@ export class Env {
 			const rootDirDataFilePath = this.path.resolve(process.cwd(), this.dataFile)
 			const isCurDirDataFile = this.fs.existsSync(curDirDataFilePath)
 			const isRootDirDataFile = !isCurDirDataFile && this.fs.existsSync(rootDirDataFilePath)
+			console.log('c: ' + curDirDataFilePath)
+			console.log('r: ' + rootDirDataFilePath)
+			console.log(isCurDirDataFile || isRootDirDataFile)
 			if (isCurDirDataFile || isRootDirDataFile) {
 				const datPath = isCurDirDataFile ? curDirDataFilePath : rootDirDataFilePath
 				console.log(datPath)
