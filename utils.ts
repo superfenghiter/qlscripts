@@ -42,7 +42,7 @@ export class Http {
 export class Env {
 	name: string
 	http: Http
-	data?: {string: any}
+	data?: {string: string}
 	dataFile: string
 	logs: string[]
 	isMute: boolean
@@ -184,7 +184,7 @@ export class Env {
 			}
 		}
 	}
-	lodash_get(source, path, defaultValue?: string) {
+	lodash_get(source, path: string, defaultValue?: string) {
 		const paths = path.replace(/[(d+)]/g, '.$1').split('.')
 		let result = source
 		for (const p of paths) {
@@ -205,38 +205,38 @@ export class Env {
 		] = value
 		return obj
 	}
-	getdata(key) {
+	getdata(key: string) {
 		let val = this.getval(key)
 		// 如果以@开头
 		if (/^@/.test(key)) {
-			// const [ objkey, paths] = /^@(.*?).(.*?)$/.exec(key)
-			// const objval = objkey ? this.getval(objkey) : ''
-			// if (objval) {
-			// 	try {
-			// 		const objedval = JSON.parse(objval)
-			// 		val = objedval ? this.lodash_get(objedval, paths, '') : val
-			// 	} catch (e) {
-			// 		val = ''
-			// 	}
-			// }
+			const [ objkey, paths] = /^@(.*?).(.*?)$/.exec(key)
+			const objval = objkey ? this.getval(objkey) : ''
+			if (objval) {
+				try {
+					const objedval = JSON.parse(objval)
+					val = objedval ? this.lodash_get(objedval, paths, '') : val
+				} catch (e) {
+					val = ''
+				}
+			}
 		}
 		return val
 	}
-	setdata(val, key) {
+	setdata(val: any, key: string) {
 		let issuc = false
 		if (/^@/.test(key)) {
-			// const [, objkey, paths] = /^@(.*?).(.*?)$/.exec(key)
-			// const objdat = this.getval(objkey)
-			// const objval = objkey ? (objdat === 'null' ? null : objdat || '{}') : '{}'
-			// try {
-			// 	const objedval = JSON.parse(objval)
-			// 	this.lodash_set(objedval, paths, val)
-			// 	issuc = this.setval(JSON.stringify(objedval), objkey)
-			// } catch (e) {
-			// 	const objedval = {}
-			// 	this.lodash_set(objedval, paths, val)
-			// 	issuc = this.setval(JSON.stringify(objedval), objkey)
-			// }
+			const [, objkey, paths] = /^@(.*?).(.*?)$/.exec(key)
+			const objdat = this.getval(objkey)
+			const objval = objkey ? (objdat === 'null' ? null : objdat || '{}') : '{}'
+			try {
+				const objedval = JSON.parse(objval)
+				this.lodash_set(objedval, paths, val)
+				issuc = this.setval(JSON.stringify(objedval), objkey)
+			} catch (e) {
+				const objedval = {}
+				this.lodash_set(objedval, paths, val)
+				issuc = this.setval(JSON.stringify(objedval), objkey)
+			}
 		} else {
 			issuc = this.setval(val, key)
 		}
@@ -254,7 +254,7 @@ export class Env {
 			return (this.data && this.data[key]) || null
 		}
 	}
-	setval(val, key) {
+	setval(val, key: string) {
 		if (this.isSurge() || this.isLoon()) {
 			return $persistentStore.write(val, key)
 		} else if (this.isQuanX()) {
