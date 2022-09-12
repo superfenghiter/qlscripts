@@ -251,6 +251,7 @@ export class Env {
 			this.data = this.loaddata()
 			return this.data?[key] : null
 		} else {
+			console.log('enter else')
 			return (this.data && this.data[key]) || null
 		}
 	}
