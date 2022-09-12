@@ -135,8 +135,8 @@ function grxx(timeout = 0) {
         }
  
         $.get(url, async (err, resp, result) => {
-            console.log("get respond")
 			if (result !== undefined) {
+                console.log(result)
             	try {
                 	const data = JSON.parse(result)
  
@@ -149,7 +149,6 @@ function grxx(timeout = 0) {
                    		// await qd()//你要执行的版块  
                     	await $.wait(2000)
                 	} else {
- 
                 	}
             	} catch (e) {
  
