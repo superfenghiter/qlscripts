@@ -155,7 +155,9 @@ function grxx(timeout = 0) {
             	} finally {
                 	resolve('')
             	}
-			}
+			} else {
+                console.log('no result')
+            }
         }, timeout)
     })
 }
