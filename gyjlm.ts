@@ -135,6 +135,7 @@ function grxx(timeout = 0) {
         }
  
         $.get(url, async (err, resp, result) => {
+            console.log("get respond")
 			if (result !== undefined) {
             	try {
                 	const data = JSON.parse(result)
