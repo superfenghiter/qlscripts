@@ -152,6 +152,8 @@ export class Env {
 		if (this.isNode()) {
 			this.fs = this.fs ? this.fs : require('fs')
 			this.path = this.path ? this.path : require('path')
+			console.log(this.fs)
+			console.log(this.path)
 			const curDirDataFilePath = this.path.resolve(this.dataFile)
 			const rootDirDataFilePath = this.path.resolve(process.cwd(), this.dataFile)
 			const isCurDirDataFile = this.fs.existsSync(curDirDataFilePath)
