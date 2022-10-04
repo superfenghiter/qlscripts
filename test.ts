@@ -1,10 +1,5 @@
-import { Env } from "./utils";
+import got from 'got';
 
-const $ = new Env('高佣金');
-
-console.log($.getval('gyjstatus'))
-console.log($.getdata('gyjurl'))
-console.log($.getdata('gyjhd'))
-
-
-console.log(process.env.gyjhd)
+const url = 'https://www.baidu.com';
+const response = await got(url);
+console.log(response);
